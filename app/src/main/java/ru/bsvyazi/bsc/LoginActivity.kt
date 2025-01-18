@@ -26,35 +26,7 @@ class LoginActivity : AppCompatActivity() {
                 binding.message.text = getString(R.string.error_empty_content)
             } else {
                 binding.message.text = getString(R.string.autorization_message)
-                val url = "https://api.bsvyazi.ru/api/v1/cabinet/auth/login"
-//                val login = binding.login.text.toString()
-//                val password = binding.password.text.toString()
-                val login = "cher0059"
-                val password = "2056"
-                val client = OkHttpClient()
-                val formBody = FormBody.Builder()
-                    .add("login", login)
-                    .add("password", password)
-                    .build()
-                val request = Request.Builder()
-                    .url(url)
-                    .post(formBody)
-                    .build()
-                client.newCall(request).enqueue(object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        binding.message.text = getString(R.string.autorization_error)
-                    }
-                    override fun onResponse(call: Call, response: Response) {
-                        if (response.isSuccessful) {
-                            val responseData = response.body?.string()
-                            val jsonObject = JsonParser.parseString(responseData).asJsonObject
-                            val apiKey = jsonObject.getAsJsonObject("data").get("token").asString
-                            println(apiKey)
-                        } else {
-                            println("Request failed with code: ${response.code}")
-                        }
-                    }
-                })
+                getUserInfo(binding.login.text.toString(),binding.password.text.toString())
             }
             finish()
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
