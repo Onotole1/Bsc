@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bsc</string>
+    <string name="emptyLoginOrPasswordMessage">Пароль или логин не могут быть пустыми</string>
+    <string name="error_empty_content">ошибка ссылки на сайт</string>
+    <string name="autorization_message">Авторизация</string>
+    <string name="autorization_error">Ошибка авторизации</string>
+</resources>
