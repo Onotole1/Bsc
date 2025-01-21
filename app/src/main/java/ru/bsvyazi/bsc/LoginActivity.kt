@@ -2,8 +2,10 @@ package ru.bsvyazi.bsc
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import ru.bsvyazi.bsc.databinding.ActivityLoginBinding
@@ -22,14 +24,19 @@ class LoginActivity : AppCompatActivity() {
             val passwordEditText : EditText = findViewById(R.id.password)
             passwordEditText.setText(password)
         }
+        val myTextView : TextView = findViewById(R.id.message)
         binding.autorization.setOnClickListener {
+            myTextView.setTextColor(Color.BLACK)
             if (binding.login.text.isNullOrBlank() || binding.password.text.isNullOrBlank()) {
-                binding.message.text = getString(R.string.error_empty_content)
+                myTextView.setTextColor(Color.RED)
+                binding.message.text = "Ошибка авторизации"
             } else {
                 binding.message.text = "Авторизация.."
                 getUserInfo(binding.login.text.toString(), binding.password.text.toString())
                 if (fio !== "") {
-                    writeToFile(this,binding.login.text.toString(), binding.password.text.toString())
+                    if (binding.saveCheckBox.isChecked) {
+                        writeToFile(this,binding.login.text.toString(), binding.password.text.toString())
+                    }
                     //finish()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     intent.putExtra("FIO", fio)
@@ -38,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("LOGIN", login)
                     startActivity(intent)
                 } else {
+                    myTextView.setTextColor(Color.RED)
                     binding.message.text = "Ошибка авторизации"
                 }
             }
