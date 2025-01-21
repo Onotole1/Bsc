@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:text="г. Черемхово, ул, Рабочая 2А"
+        android:text=""
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bs_image" />
@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="20dp"
-        android:text="Тариф 150 мбит"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/client_info"
         />
@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Баланс - 223 Р"
-        android:textSize="30dp"
+        android:text=""
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tariff" />
 
@@ -75,7 +75,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:text="Техническая поддержка"
-        android:backgroundTint="@color/button_color"
+        android:backgroundTint="@color/non_active_button_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pay"
         />
