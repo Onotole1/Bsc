@@ -47,6 +47,9 @@ class LoginActivity : AppCompatActivity() {
                             binding.password.text.toString()
                         )
                     }
+                    else {
+                        ru.bsvyazi.bsc.deleteFile(this)
+                    }
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     intent.putExtra("ADDRESS", _userData.address)
                     intent.putExtra("TARIF", _userData.tarif)

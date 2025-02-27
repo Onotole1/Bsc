@@ -32,6 +32,12 @@ fun readFromFile(context: Context) {
     }
 }
 
+fun deleteFile(context: Context) {
+    val file = File(context.filesDir, fileName)
+    file.delete()
+}
+
+
 fun writeToFile(context: Context, login: String, password: String) {
     try {
         val file = File(context.filesDir, fileName)
