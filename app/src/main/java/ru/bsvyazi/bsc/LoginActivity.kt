@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                         )
                     }
                     else {
-                        ru.bsvyazi.bsc.deleteFile(this)
+                        //ru.bsvyazi.bsc.deleteFile(this)
                     }
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     intent.putExtra("ADDRESS", _userData.address)
