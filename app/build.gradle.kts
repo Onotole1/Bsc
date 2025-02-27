@@ -44,6 +44,9 @@ android {
                     "src/main/kotlin+java/retrofit"
                 )
             }
+            aidl {
+                srcDirs("src/main/aidl")
+            }
         }
     }
 }
@@ -65,6 +68,7 @@ dependencies {
     val gson_version = "2.11.0"
     val retrofit_version = "2.9.0"
 
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")

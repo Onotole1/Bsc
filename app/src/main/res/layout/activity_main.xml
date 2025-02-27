@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/bs_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,16 +19,52 @@
         app:srcCompat="@drawable/bs_pic_background" />
 
     <TextView
-        android:id="@+id/client_info"
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:text=""
-        android:textSize="20dp"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bs_image" />
+        app:layout_constraintTop_toBottomOf="@id/bs_image"
+        tools:ignore="ExtraText" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:text="Статус: "
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address" />
+
+    <TextView
+        android:id="@+id/curstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text=""
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@id/status"
+        app:layout_constraintTop_toBottomOf="@id/address" />
+
+    <TextView
+        android:id="@+id/balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text=""
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status" />
 
     <TextView
         android:id="@+id/tariff"
@@ -36,75 +72,72 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/client_info"
+        app:layout_constraintTop_toBottomOf="@id/balance"
         />
 
     <TextView
-        android:id="@+id/client_balance"
+        android:id="@+id/internetprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:textSize="18dp"
         android:text=""
-        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tariff" />
+        app:layout_constraintTop_toBottomOf="@id/tariff"
+        />
+
+    <TextView
+        android:id="@+id/fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/internetprice"
+        />
+
+    <TextView
+        android:id="@+id/feeprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fee"
+        />
+
+    <TextView
+        android:id="@+id/totalprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feeprice"
+        />
 
     <Button
         android:id="@+id/pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textSize="30dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:text="Оплатить"
         android:backgroundTint="@color/button_color"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/client_balance"
+        app:layout_constraintTop_toBottomOf="@id/totalprice"
         />
-
-    <Button
-        android:id="@+id/support"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="Техническая поддержка"
-        android:backgroundTint="@color/non_active_button_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pay"
-        />
-
-    <Button
-        android:id="@+id/site"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="Наш сайт"
-        android:backgroundTint="@color/button_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/support"
-        />
-
-    <Button
-        android:id="@+id/vk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="VK"
-        android:backgroundTint="@color/button_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/site"
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
