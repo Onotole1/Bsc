@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:versionName="1.0"
-    android:versionCode="1"
-    >
+    package="ru.bsvyazi.bsconnect"
+    android:versionCode="21"
+    android:versionName="1.01">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -15,15 +15,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Bsc"
+        android:theme="@style/Theme.bsconnect"
         tools:targetApi="31">
         <activity
+            android:name=".BlagoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfidentialActivity"
+            android:exported="false" />
+        <activity
             android:name=".SiteActivity"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -31,16 +41,15 @@
             android:name=".LoginActivity"
             android:exported="true"
             tools:ignore="IntentFilterExportedReceiver">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

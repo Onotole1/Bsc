@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.bsvyazi.bsc"
+    namespace = "ru.bsvyazi.bsconnect"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ru.bsvyazi.bsc"
+        applicationId = "ru.bsvyazi.bsconnect"
         minSdk = 23
         targetSdk = 35
         versionCode = 1

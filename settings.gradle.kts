@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Bsc"
+rootProject.name = "Bsconnect"
 include(":app")
  
