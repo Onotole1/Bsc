@@ -3,17 +3,17 @@ package ru.bsvyazi.bsconnect
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.bsvyazi.bsconnect.Repository._error
 import ru.bsvyazi.bsconnect.Repository._errorCode
 import ru.bsvyazi.bsconnect.Repository._userData
 import ru.bsvyazi.bsconnect.Repository.getData
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
-import android.widget.CheckBox
-import androidx.core.content.ContextCompat
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +22,14 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         binding.message.text = ""
+
+        // проверяем наличие интернета
+        if (!isInternetAvailable(this)) {
+            val intent = Intent(this@LoginActivity, AccessActivity::class.java)
+            startActivity(intent)
+        }
+
+        // проверяем наличие файла с данными для входа в приложение
         if (isFileExists(this)) {
             readFromFile(this)
             val loginEditText: EditText = findViewById(R.id.login)
@@ -72,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
                             binding.message.text = "Ошибка авторизации $_errorCode"
                         }
                         if (_errorCode == 0) {
-                            binding.message.text = "Ошибка авторизации" + _error
+                            binding.message.text = "Ошибка авторизации " + _error
                         }
                     }
                 }

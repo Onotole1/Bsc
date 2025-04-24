@@ -43,6 +43,7 @@ fun getCredit() {
         val data: List<Any>,
         val message: String
     )
+
     val mediaType = "text/plain".toMediaType()
     val JSON = "application/json; charset=utf-8".toMediaType()
     val body = RequestBody.create(JSON, "{}")
@@ -63,7 +64,8 @@ fun getCredit() {
                 if (it.isSuccessful) {
                     val responseBody = response.body?.string()
                     val gson = Gson()
-                    val apiResponse: CreditResponse = gson.fromJson(responseBody, CreditResponse::class.java)
+                    val apiResponse: CreditResponse =
+                        gson.fromJson(responseBody, CreditResponse::class.java)
                     _creditSuccess = apiResponse.success
                     println()
                 } else {
@@ -100,11 +102,9 @@ fun getData(login: String, password: String) {
                     try {
                         apiKey = jsonObject.getJSONObject("data").getString("token")
                         _token = apiKey
-                    }
-                    catch (e: JSONException) {
+                    } catch (e: JSONException) {
                         _error = " неверный логин или пароль"
-                    }
-                    catch (e: Exception) {
+                    } catch (e: Exception) {
                         _error = e.message!!
                     }
                     if (_error == "") {

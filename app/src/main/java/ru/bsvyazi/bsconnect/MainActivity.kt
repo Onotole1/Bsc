@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.bsvyazi.bsconnect.Repository._userData
 import ru.bsvyazi.bsconnect.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n", "ResourceAsColor")

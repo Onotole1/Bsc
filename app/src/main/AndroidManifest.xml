@@ -6,6 +6,7 @@
     android:versionName="1.01">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.bsconnect"
         tools:targetApi="31">
+        <activity
+            android:name=".AccessActivity"
+            android:exported="false" />
         <activity
             android:name=".BlagoActivity"
             android:exported="false" />

@@ -2,16 +2,12 @@ package ru.bsvyazi.bsconnect
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import ru.bsvyazi.bsconnect.Repository._creditSuccess
 import ru.bsvyazi.bsconnect.databinding.ActivityBlagoBinding
-import ru.bsvyazi.bsconnect.databinding.ActivityCreditBinding
 
 class BlagoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +18,7 @@ class BlagoActivity : AppCompatActivity() {
         val myTextView: TextView = findViewById(R.id.message)
         if (_creditSuccess) {
             binding.message.text = "ОБЕЩАННЫЙ ПЛАТЕЖ подключен !"
-        }
-        else {
+        } else {
             myTextView.setTextColor(Color.RED)
             binding.message.text = "Ошибка подключения ОБЕЩАННЫЙ ПЛАТЕЖ не подключен..."
         }

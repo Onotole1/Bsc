@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.delay
-import ru.bsvyazi.bsconnect.Repository._creditSuccess
-import ru.bsvyazi.bsconnect.Repository._userData
 import ru.bsvyazi.bsconnect.Repository.getCredit
 import ru.bsvyazi.bsconnect.databinding.ActivityCreditBinding
 
