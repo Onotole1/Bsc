@@ -1,5 +1,6 @@
 package ru.bsvyazi.bsconnect
 
+import PaymentReminderWorker
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
@@ -10,11 +11,17 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import ru.bsvyazi.bsconnect.Repository._userData
 import ru.bsvyazi.bsconnect.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
+
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n", "ResourceAsColor")
@@ -38,11 +45,16 @@ class MainActivity : AppCompatActivity() {
 
         //заполняем экран информацией об абоненте
 
+        //получаем инфу о дате оплаты
         var payDate = _userData.endDate
         // если абонет отключен ставим дату платежа - текущую дату
         if (payDate == "") {
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             payDate = dateFormat.format(Date()).toString()
+        }
+        else {
+            // запускаем процесс который его оповестит потом
+            schedulePaymentReminder(payDate)
         }
         binding.payDate.text = "Следующий платеж до $payDate"
         binding.address.text = intent.getStringExtra("ADDRESS")
@@ -90,5 +102,28 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("TOTALPRICE", totalPrice.toString())
             startActivity(intent)
         }
+    }
+
+    fun schedulePaymentReminder(paymentDate: String) {
+        // Обработка даты
+        val paymentDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val paymentDateObj = paymentDateFormat.parse(paymentDate) ?: return
+
+        // Получаем текущее время и добавляем 3 дня
+        val currentTime = Calendar.getInstance()
+        currentTime.time = paymentDateObj
+        currentTime.add(Calendar.DAY_OF_YEAR, -1) // Устанавливаем на 3 дня раньше
+
+        // Запланируем уведомление
+        val inputData = Data.Builder()
+            .putString("payment_date", paymentDate)
+            .build()
+
+        val reminderRequest = OneTimeWorkRequest.Builder(PaymentReminderWorker::class.java)
+            .setInputData(inputData)
+            .setInitialDelay(currentTime.timeInMillis - System.currentTimeMillis(), TimeUnit.MILLISECONDS) // Задержка до времени уведомления
+            .build()
+
+        WorkManager.getInstance(this).enqueue(reminderRequest)
     }
 }

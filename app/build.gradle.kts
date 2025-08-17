@@ -81,6 +81,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("com.google.code.gson:gson:$gson_version")
+    implementation("androidx.work:work-runtime-ktx:2.7.0")
 
     testImplementation("junit:junit:$junitVersion")
     androidTestImplementation("androidx.test.ext:junit:$extJunitVersion")
