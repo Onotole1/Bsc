@@ -26,39 +26,25 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Введите логин"
+        android:hint="Введите номер телефона"
         android:gravity="start|top"
         android:inputType="textVisiblePassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bs_image"
         tools:ignore="LabelFor" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Введите пароль"
-        android:gravity="start|top"
-        android:inputType="textVisiblePassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login"
-        tools:ignore="LabelFor" />
-
     <Button
-        android:id="@+id/autorization"
+        android:id="@+id/getSms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:text="Войти"
+        android:text="Получить код по смс"
         android:backgroundTint="@color/button_color"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintTop_toBottomOf="@id/login"
         />
 
     <TextView
@@ -71,33 +57,21 @@
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text=""
-        app:layout_constraintStart_toStartOf="@id/saveCheckBox"
-        app:layout_constraintEnd_toEndOf="@id/saveCheckBox"
-        app:layout_constraintTop_toBottomOf="@id/saveCheckBox"
-        />
-
-    <CheckBox
-        android:id="@+id/saveCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Сохранить логин и пароль"
-        android:buttonTint="@color/button_color"
-        app:layout_constraintStart_toStartOf="@id/autorization"
-        app:layout_constraintEnd_toEndOf="@id/autorization"
-        app:layout_constraintTop_toBottomOf="@id/autorization"
+        app:layout_constraintStart_toStartOf="@id/getSms"
+        app:layout_constraintEnd_toEndOf="@id/getSms"
+        app:layout_constraintTop_toBottomOf="@id/getSms"
         />
 
     <TextView
-        android:id="@+id/messageSmsLogin"
+        android:id="@+id/messageLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="15dp"
+        android:textSize="18dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="Авторизация по номеру телефона"
+        android:text="Авторизация по логин и пароль"
         android:textColor="@color/button_color"
         app:layout_constraintStart_toStartOf="@id/message"
         app:layout_constraintEnd_toEndOf="@id/message"

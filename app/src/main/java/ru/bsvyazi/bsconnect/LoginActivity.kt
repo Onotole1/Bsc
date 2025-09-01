@@ -1,5 +1,6 @@
 package ru.bsvyazi.bsconnect
 
+import ApiClient
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,11 +10,10 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import ru.bsvyazi.bsconnect.Repository._error
-import ru.bsvyazi.bsconnect.Repository._errorCode
-import ru.bsvyazi.bsconnect.Repository._userData
-import ru.bsvyazi.bsconnect.Repository.getData
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,66 +21,95 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
-        binding.message.text = ""
+        val messageTextView: TextView = findViewById(R.id.message)
+        messageTextView.text = ""
+        val editedLogin: EditText = findViewById(R.id.login)
+        val editedPassword: EditText = findViewById(R.id.password)
+        val saveCheckBox: CheckBox = findViewById(R.id.saveCheckBox)
+        // по умолчанию чекбокс в положение - "сохранять"
+        saveCheckBox.isChecked = true
 
-        // проверяем наличие интернета
+        fun setMessage(status: Boolean, message: String) {
+            // установка цвета сообщения BLACK - normal, alert - error
+            if (status) messageTextView.setTextColor(Color.BLACK)
+            else messageTextView.setTextColor(ContextCompat.getColor(this, R.color.alert))
+            messageTextView.text = message
+        }
+
+        // проверяем наличие интернет соеденения
         if (!isInternetAvailable(this)) {
             val intent = Intent(this@LoginActivity, AccessActivity::class.java)
             startActivity(intent)
         }
 
-        // проверяем наличие файла с данными для входа в приложение
+        // проверяем наличие файла с данными для входа
         if (isFileExists(this)) {
             readFromFile(this)
-            val loginEditText: EditText = findViewById(R.id.login)
-            loginEditText.setText(login)
-            val passwordEditText: EditText = findViewById(R.id.password)
-            passwordEditText.setText(password)
+            editedLogin.setText(login)
+            editedPassword.setText(password)
         }
-        val myTextView: TextView = findViewById(R.id.message)
-        val myCheckBox: CheckBox = findViewById(R.id.saveCheckBox)
-        myCheckBox.isChecked = true
 
         binding.autorization.setOnClickListener {
-            myTextView.setTextColor(Color.BLACK)
-            if (binding.login.text.isNullOrBlank() || binding.password.text.isNullOrBlank()) {
-                myTextView.setTextColor(ContextCompat.getColor(this, R.color.alert))
-                binding.message.text = "Пустой пароль или логин"
+            if (editedLogin.text.isNullOrBlank() || editedPassword.text.isNullOrBlank()) {
+                setMessage(false, "Пустой пароль или логин")
             } else {
-                binding.message.text = "Авторизация.."
-                getData(binding.login.text.toString(), binding.password.text.toString())
-                //println(_userData)
-                Thread.sleep(2000)
-                if (_userData.address !== "") {
-                    // проверка чекбокса сохранять/не сохранять
-                    if (binding.saveCheckBox.isChecked) {
-                        writeToFile(
-                            this,
-                            binding.login.text.toString(),
-                            binding.password.text.toString()
-                        )
-                    } else deleteFile(this)
-
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra("ADDRESS", _userData.address)
-                    intent.putExtra("TARIF", _userData.tarif)
-                    intent.putExtra("BALANCE", _userData.amount)
-                    intent.putExtra("LOGIN", _userData.login)
-                    intent.putExtra("STATUS", _userData.status)
-                    intent.putExtra("FEE", _userData.feeName)
-                    intent.putExtra("FEEPRICE", _userData.feePrice)
-                    intent.putExtra("INTERNETPRICE", _userData.internetPrice)
-                    startActivity(intent)
-                } else {
-                    myTextView.setTextColor(ContextCompat.getColor(this, R.color.alert))
-                    if (_errorCode == 0 && _error == "") {
-                        binding.message.text = "Ошибка получения данных"
-                    } else {
-                        if (_error == "") {
-                            binding.message.text = "Ошибка авторизации $_errorCode"
+                val apiClient = ApiClient()
+                var token: String?
+                lifecycleScope.launch {
+//                    val a = apiClient.phoneSuspend("89135127297")
+//                    println(a)
+                    token = try {
+                        apiClient.loginSuspend(editedLogin.text.toString(), editedPassword.text.toString())
+                    } catch (e: Exception) {
+                        setMessage(false, "Ошибка запроса")
+                        null
+                    }
+                    if (token == null) {
+                        setMessage(false, "Неверный логин или пароль")
+                    }
+                    setMessage(true, "Получение данных")
+                    if (token != null) {
+                        val userData = try {
+                            apiClient.getUserSuspend(token!!)
+                        } catch (e: Exception) {
+                            setMessage(false, "Ошибка получения данных")
+                            null
                         }
-                        if (_errorCode == 0) {
-                            binding.message.text = "Ошибка авторизации " + _error
+                        if (userData == null) setMessage(false, "Ошибка данных")
+                        else {
+                            // проверка чекбокса сохранять/не сохранять
+                            if (saveCheckBox.isChecked) {
+                                writeToFile(this@LoginActivity,
+                                    editedLogin.text.toString(),
+                                    editedPassword.text.toString()
+                                )
+                            } else deleteFile(this@LoginActivity)
+                            // загружаем данные подписок
+                            val service = try {
+                                apiClient.getSubscriptionsSuspend(token!!)
+                            } catch (e: Exception) {
+                                setMessage(false, "Ошибка получения данных подписки")
+                                null
+                            }
+
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            if (service != null) {
+                                val activeService = service.firstOrNull { it.active > 0 }
+                                intent.putExtra("SUBSCRIPTION", activeService?.name)
+                                intent.putExtra("SUBSCRIPTION_PRICE", activeService?.info?.service_price)
+                            }
+                            else {
+                                intent.putExtra("SUBSCRIPTION", "")
+                                intent.putExtra("SUBSCRIPTION_PRICE", "0")
+                            }
+
+                            intent.putExtra("ADDRESS", userData.address)
+                            intent.putExtra("TARIF", userData.tarif)
+                            intent.putExtra("BALANCE", userData.deposit)
+                            intent.putExtra("LOGIN", editedLogin.text)
+                            intent.putExtra("STATUS", userData.blocked)
+                            intent.putExtra("INTERNETPRICE", userData.tarif_fixed_cost)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -88,3 +117,4 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+

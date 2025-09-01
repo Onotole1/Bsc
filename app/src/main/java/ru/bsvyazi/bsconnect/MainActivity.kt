@@ -34,8 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         //поверяем доступность обещанного платежа если не доступен гасим кнопку
         val creditButton: Button = findViewById(R.id.credit)
-        val creditSize = _userData.credit.toInt()
-        if (creditSize > 0) {
+        val creditSize = _userData.credit.toIntOrNull()
+        // заплатка
+        if (creditSize != null) {
             creditButton.isEnabled = false
             binding.creditInfo.text = "Обещанный платеж: $creditSize руб."
         } else {
@@ -73,8 +74,8 @@ class MainActivity : AppCompatActivity() {
         binding.tariff.text = "Тариф: " + intent.getStringExtra("TARIF")
         val internetPrice = intent.getStringExtra("INTERNETPRICE")?.toDouble()?.toInt()
         binding.internetprice.text = "Абонплата: $internetPrice руб."
-        binding.fee.text = "Дополнительно: " + intent.getStringExtra("FEE")
-        val feePrice = intent.getStringExtra("FEEPRICE")?.toDouble()?.toInt()
+        binding.fee.text = "Дополнительно: " + intent.getStringExtra("SUBSCRIPTION")
+        val feePrice = intent.getStringExtra("SUBSCRIPTION_PRICE")?.toDouble()?.toUInt().toString()
         binding.feeprice.text = "Абонплата: $feePrice руб."
         val totalPrice = feePrice?.plus(internetPrice!!)
         binding.totalprice.text = "Итого:     $totalPrice руб."

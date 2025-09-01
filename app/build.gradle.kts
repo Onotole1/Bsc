@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -55,7 +56,7 @@ dependencies {
 
     implementation(libs.androidx.activity)
     //implementation(libs.androidx.annotation)
-    val coreVersion = "1.15.0"
+    val coreVersion = "1.16.0"
     val appcompatVersion = "1.7.0"
     val mdcVersion = "1.12.0"
     val constraintlayoutVersion = "2.2.0"
@@ -66,10 +67,10 @@ dependencies {
     val activityVersion = "1.9.3"
     val lifecycleVersion = "2.8.7"
     val gson_version = "2.11.0"
-    val retrofit_version = "2.9.0"
+    val retrofit_version = "2.11.0"
 
-    implementation("com.google.code.gson:gson:2.8.9")
-    implementation("com.squareup.okhttp3:okhttp:4.7.2")
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
     implementation("androidx.core:core-ktx:$coreVersion")
@@ -81,7 +82,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("com.google.code.gson:gson:$gson_version")
-    implementation("androidx.work:work-runtime-ktx:2.7.0")
+    implementation("androidx.work:work-runtime-ktx:2.10.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     testImplementation("junit:junit:$junitVersion")
     androidTestImplementation("androidx.test.ext:junit:$extJunitVersion")
