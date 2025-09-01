@@ -1,4 +1,7 @@
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 // Data classes for login response
 data class LoginResponse(
     val success: Boolean,
@@ -11,13 +14,15 @@ data class TokenData(
 )
 
 // Data classes for Subscriptions response
+@Parcelize
 data class SubscriptionsResponse(
     val success: Boolean,
     val code: Int,
     val data: List<Service>?,
     val message: String?
-)
+): Parcelable
 
+@Parcelize
 data class Service(
     val id: String,
     val name: String,
@@ -25,8 +30,9 @@ data class Service(
     val connected: Int,
     val active: Int,
     val info: ServiceInfo
-)
+) : Parcelable
 
+@Parcelize
 data class ServiceInfo(
     val serviceid: String,
     val service_alias: String,
@@ -45,16 +51,18 @@ data class ServiceInfo(
     val activation_by_user: String,
     val service_date_start: String,
     val service_date_stop: String
-)
+) : Parcelable
 
 // Data classes for user info response
+@Parcelize
 data class UserResponse(
     val success: Boolean,
     val code: Int,
     val data: UserData?,
     val message: String?
-)
+) : Parcelable
 
+@Parcelize
 data class UserData(
     val user: String?,
     val crypt_method: String?,
@@ -244,7 +252,7 @@ data class UserData(
     val razresh_minus: String?,
     val use_drweb: String?,
     val check_freeze: String?,
-    val freeze_date_info: List<Any>?,
+    val freeze_date_info: List<String>?,
     val unfreeze_earlier_disallow: String?,
     val kabinet_do_freeze_balanse_plus: String?,
     val cena_freeze: String?,
@@ -276,8 +284,9 @@ data class UserData(
     val date_itog: String?,
     val address_old: String?,
     val fee: FeeData?
-)
+) : Parcelable
 
+@Parcelize
 data class ShowData(
     val payments_tile: String?,
     val speed_out: String?,
@@ -286,12 +295,14 @@ data class ShowData(
     val index_enddate: String?,
     val fee: String?,
     val discount: String?
-)
+): Parcelable
 
+@Parcelize
 data class PaymentMethod(
     val enabled: Int?
-)
+) : Parcelable
 
+@Parcelize
 data class FeeData(
     val packet: PacketFee?,
     val subscriptions: SubscriptionFee?,
@@ -300,37 +311,50 @@ data class FeeData(
     val installments: String?,
     val total: String?,
     val total_with_discount: String?
-)
+): Parcelable
 
+@Parcelize
 data class PacketFee(
     val price: String?,
     val discount: Discount?,
     val price_with_discount: String?
-)
+) : Parcelable
 
+@Parcelize
 data class Discount(
     val value: String?,
     val sign: String?
-)
+) : Parcelable
 
+@Parcelize
 data class SubscriptionFee(
     val total: String?,
     val total_with_discount: String?,
     val discount: Discount?,
     val detailed: List<SubscriptionDetail>?
-)
+) : Parcelable
 
+@Parcelize
 data class SubscriptionDetail(
     val id: String?,
     val name: String?,
     val price: String?,
     val discount: String?,
     val price_with_discount: String?
-)
+) : Parcelable
 
+@Parcelize
 data class DevicesFee(
     val total: String?,
     val total_with_discount: String?,
     val discount: Discount?,
-    val detailed: List<Any>?
+    val detailed: List<String>?
+) : Parcelable
+
+//Data class for credit response
+data class CreditResponse(
+    val success: Boolean,
+    val code: Int,
+    val data: List<Any>,
+    val message: String
 )

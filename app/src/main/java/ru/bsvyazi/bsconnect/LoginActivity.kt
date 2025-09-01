@@ -93,6 +93,9 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("USER_DATA", userData)
+                            intent.putExtra("LOGIN", editedLogin.text)
+                            // проверяем подписки, если нет то передаем нулевые значения
                             if (service != null) {
                                 val activeService = service.firstOrNull { it.active > 0 }
                                 intent.putExtra("SUBSCRIPTION", activeService?.name)
@@ -102,13 +105,6 @@ class LoginActivity : AppCompatActivity() {
                                 intent.putExtra("SUBSCRIPTION", "")
                                 intent.putExtra("SUBSCRIPTION_PRICE", "0")
                             }
-
-                            intent.putExtra("ADDRESS", userData.address)
-                            intent.putExtra("TARIF", userData.tarif)
-                            intent.putExtra("BALANCE", userData.deposit)
-                            intent.putExtra("LOGIN", editedLogin.text)
-                            intent.putExtra("STATUS", userData.blocked)
-                            intent.putExtra("INTERNETPRICE", userData.tarif_fixed_cost)
                             startActivity(intent)
                         }
                     }

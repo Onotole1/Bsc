@@ -31,7 +31,10 @@ interface ApiService {
         @Header("Authorization") apiKey: String
     ) : SubscriptionsResponse?
 
-
+    @POST("/api/v1/cabinet/user/services/credit")
+    suspend fun creditActivation(
+        @Header("Authorization") apiKey: String
+    ) : CreditResponse?
 
     @Multipart
     @POST("/api/v1/cabinet/auth/phone")
@@ -126,6 +129,15 @@ class ApiClient(userAgent: String = "MikbillApiAgent/1.0") {
         } else {
             Log.w("ApiClient", "Subscriptions data fetch failed or response null $response.success ")
             null
+        }
+    }
+
+    suspend fun creditActivationSuspend(apiKey: String) {
+        val response = apiService.creditActivation(apiKey)
+        if (response != null && response.success) {
+            Log.d("ApiClient", "credit is active")
+        } else {
+            Log.w("ApiClient", "credit activate fail")
         }
     }
 }

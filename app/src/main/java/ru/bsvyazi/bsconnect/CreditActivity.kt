@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import ru.bsvyazi.bsconnect.Repository.getCredit
 import ru.bsvyazi.bsconnect.databinding.ActivityCreditBinding
 
 class CreditActivity : AppCompatActivity() {
@@ -28,8 +27,7 @@ class CreditActivity : AppCompatActivity() {
             binding.creditInfo.text.toString() + " в размере  " + totalPrice + " руб."
         binding.address.text = "Ваш адрес: " + intent.getStringExtra("ADDRESS")
         binding.pay.setOnClickListener {
-            getCredit()
-            Thread.sleep(2000)
+           //
             val intent = Intent(this@CreditActivity, BlagoActivity::class.java)
             startActivity(intent)
         }

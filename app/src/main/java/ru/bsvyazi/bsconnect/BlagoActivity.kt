@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import ru.bsvyazi.bsconnect.Repository._creditSuccess
 import ru.bsvyazi.bsconnect.databinding.ActivityBlagoBinding
 
 class BlagoActivity : AppCompatActivity() {
@@ -16,7 +15,7 @@ class BlagoActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         val myTextView: TextView = findViewById(R.id.message)
-        if (_creditSuccess) {
+        if (true) {
             binding.message.text = "ОБЕЩАННЫЙ ПЛАТЕЖ подключен !"
         } else {
             myTextView.setTextColor(Color.RED)
