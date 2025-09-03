@@ -1,6 +1,6 @@
 package ru.bsvyazi.bsconnect
 
-import PaymentReminderWorker
+import ru.bsvyazi.bsconnect.utils.PaymentReminderWorker
 import UserData
 import android.annotation.SuppressLint
 import android.content.Intent

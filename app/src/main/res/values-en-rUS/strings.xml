@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bsconnect</string>
+    <string name="error_empty_content">bad link</string>
+    <string name="authorization_message">Autorization</string>
+    <string name="authorization_error">Autorization fail</string>
+    <string name="credit_info">By ordering a credit service, you confirm your agreement to pay the full subscription fee for the current month</string>
+    <string name="emptyLoginOrPasswordMessage">login or password is empty</string>
+    <string name="credit_alert">The service is available for a maximum of 3 days and can be used once per calendar month.</string>
+    <string name="ApiRequestFail">API request failed</string>
+    <string name="BadLoginOrPassword">Bad login or password</string>
+    <string name="LoadingData">Loading...</string>
+    <string name="DataTransferError">Data transfer fail</string>
+    <string name="BadData">Incorect data</string>
+    <string name="SubscriptionDataError">incorect subscription data</string>
+    <string name="InternetConnectionFail">There is no internet connection, try turning on \"Airplane Mode\" in the settings, and then turn it off after a while</string>
+    <string name="RetryButtonText">Retry</string>
+    <string name="LoginPromptText">Login</string>
+    <string name="PasswordPromptText">Password</string>
+    <string name="AutorizationButtonText">Login</string>
+    <string name="SaveCheckboxText">save login and password</string>
+    <string name="LoginBySMS">Login by SMS</string>
+    <string name="AbonStatus">Status:</string>
+    <string name="PayButtonText">Pay</string>
+    <string name="CreditButtonText">Credit</string>
+    <string name="LogoDescription">BS_Logo</string>
+    <string name="CreditPayButtonTexr">Активировать услугу</string>
+    <string name="ConfirmCreditCheckboxText">подтверждаю</string>
+    <string name="BackButtonText">На страницу авторизации</string>
+    <string name="GetSmsCode">Получить код по смс</string>
+    <string name="LognPasswordAutorization">Авторизация по логин и пароль</string>
+</resources>

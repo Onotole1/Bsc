@@ -1,4 +1,4 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.utils
 
 import android.content.Context
 import java.io.File

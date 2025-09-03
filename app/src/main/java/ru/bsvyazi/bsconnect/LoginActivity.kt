@@ -13,6 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
+import ru.bsvyazi.bsconnect.utils.isFileExists
+import ru.bsvyazi.bsconnect.utils.isInternetAvailable
+import ru.bsvyazi.bsconnect.utils.login
+import ru.bsvyazi.bsconnect.utils.password
+import ru.bsvyazi.bsconnect.utils.readFromFile
+import ru.bsvyazi.bsconnect.utils.writeToFile
 
 
 class LoginActivity : AppCompatActivity() {
@@ -36,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             messageTextView.text = message
         }
 
-        // проверяем наличие интернет соеденения
+        // проверяем статус интернет соеденения
         if (!isInternetAvailable(this)) {
             val intent = Intent(this@LoginActivity, AccessActivity::class.java)
             startActivity(intent)
@@ -51,31 +57,29 @@ class LoginActivity : AppCompatActivity() {
 
         binding.autorization.setOnClickListener {
             if (editedLogin.text.isNullOrBlank() || editedPassword.text.isNullOrBlank()) {
-                setMessage(false, "Пустой пароль или логин")
+                setMessage(false, R.string.emptyLoginOrPasswordMessage.toString())
             } else {
                 val apiClient = ApiClient()
                 var token: String?
                 lifecycleScope.launch {
-//                    val a = apiClient.phoneSuspend("89135127297")
-//                    println(a)
                     token = try {
                         apiClient.loginSuspend(editedLogin.text.toString(), editedPassword.text.toString())
                     } catch (e: Exception) {
-                        setMessage(false, "Ошибка запроса")
+                        setMessage(false, R.string.ApiRequestFail.toString())
                         null
                     }
                     if (token == null) {
-                        setMessage(false, "Неверный логин или пароль")
+                        setMessage(false, R.string.BadLoginOrPassword.toString())
                     }
-                    setMessage(true, "Получение данных")
+                    setMessage(true, R.string.LoadingData.toString())
                     if (token != null) {
                         val userData = try {
                             apiClient.getUserSuspend(token!!)
                         } catch (e: Exception) {
-                            setMessage(false, "Ошибка получения данных")
+                            setMessage(false, R.string.DataTransferError.toString())
                             null
                         }
-                        if (userData == null) setMessage(false, "Ошибка данных")
+                        if (userData == null) setMessage(false, R.string.BadData.toString())
                         else {
                             // проверка чекбокса сохранять/не сохранять
                             if (saveCheckBox.isChecked) {
@@ -83,12 +87,12 @@ class LoginActivity : AppCompatActivity() {
                                     editedLogin.text.toString(),
                                     editedPassword.text.toString()
                                 )
-                            } else deleteFile(this@LoginActivity)
+                            } else ru.bsvyazi.bsconnect.utils.deleteFile(this@LoginActivity)
                             // загружаем данные подписок
                             val service = try {
                                 apiClient.getSubscriptionsSuspend(token!!)
                             } catch (e: Exception) {
-                                setMessage(false, "Ошибка получения данных подписки")
+                                setMessage(false, R.string.SubscriptionDataError.toString())
                                 null
                             }
 

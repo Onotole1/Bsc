@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Bsconnect</string>
-    <string name="emptyLoginOrPasswordMessage">Пароль или логин не могут быть пустыми</string>
     <string name="error_empty_content">ошибка ссылки на сайт</string>
     <string name="authorization_message">Авторизация</string>
     <string name="authorization_error">Ошибка авторизации</string>
     <string name="credit_info">Заказом услуги ОБЕЩАННЫЙ ПЛАТЕЖ вы подтверждаете ваше согласие оплатить в полном объеме абонплату за текущий месяц</string>
-    <string name="credit_alert">Услуга предоставляется на срок не более 3х дней и доступна 1 раз в течении 1 календарного месяца</string>
-    <string name="confidential_policy_header">
+    <string name="confidential_policy_header" translatable="false">
         Политика конфиденциальности. Политика в отношении обработки персональных данных</string>
 
-    <string name="confidential_policy">
+    <string name="confidential_policy" translatable="false">
         1. Общие положения
         Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных Тимонина Алексея Валерьевича (далее – Оператор).
         Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.
@@ -62,4 +60,29 @@
         В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.
         Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу https://bsvyazi.ru/conf.
     </string>
+    <string name="emptyLoginOrPasswordMessage">пароль или логин не могут быть пустыми</string>
+    <string name="credit_alert">Услуга предоставляется на срок не более 3х дней и доступна 1 раз в течении 1 календарного месяц</string>
+    <string name="ApiRequestFail">Ошибка запроса</string>
+    <string name="BadLoginOrPassword">Неверный логин или пароль</string>
+    <string name="LoadingData">Получение данных</string>
+    <string name="DataTransferError">Ошибка получения данных</string>
+    <string name="BadData">Ошибка данных</string>
+    <string name="SubscriptionDataError">Ошибка получения данных подписки</string>
+    <string name="InternetConnectionFail">Отсутствует подключение к интернету, попробуйте включить «Режим полёта» в настройках,         а через некоторое время выключить его</string>
+    <string name="RetryButtonText">На страницу авторизации</string>
+    <string name="LoginPromptText">Введите логин</string>
+    <string name="PasswordPromptText">Введите пароль</string>
+    <string name="AutorizationButtonText">Войти</string>
+    <string name="SaveCheckboxText">Сохранить логин и пароль</string>
+    <string name="LoginBySMS">Авторизация по номеру телефона</string>
+    <string name="AbonStatus">Статус:</string>
+    <string name="PayButtonText">Оплатить</string>
+    <string name="CreditButtonText">Обещанный платеж</string>
+    <string name="LogoDescription">BS_Logo</string>
+    <string name="CreditPayButtonTexr">Активировать услугу</string>
+    <string name="ConfirmCreditCheckboxText">подтверждаю</string>
+    <string name="BackButtonText">На страницу авторизации</string>
+    <string name="PhoneNumberPrompt">Введите номер телефона</string>
+    <string name="GetSmsCode">Получить код по смс</string>
+    <string name="LognPasswordAutorization">Авторизация по логин и пароль</string>
 </resources>
