@@ -20,7 +20,10 @@
         android:theme="@style/Theme.bsconnect"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.PhoneLogin"
+            android:name=".Activity.PauseConractActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LoginByPhoneActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AccessActivity"

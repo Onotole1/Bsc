@@ -22,10 +22,11 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import androidx.core.net.toUri
 
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
+    @SuppressLint("SetTextI18n", "ResourceAsColor", "DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         binding.payDate.text = "Следующий платеж до $payDate"
         binding.address.text = userData?.address
         val statusTextView: TextView = findViewById(R.id.curstatus)
-        if (userData?.state == "0") {
+        if (userData?.state == "1") {
             statusTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.ok))
             statusTextView.setTextColor(Color.WHITE)
             binding.curstatus.text = "Активен"
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
         val currentBalance = userData?.deposit?.toDouble()
         binding.balance.text = "Текущий баланс: " + String.format("%.2f", currentBalance) + " руб."
-        binding.tariff.text = "Тариф: " + userData?.tarif
+        binding.tariff.text = "Тариф: " + userData?.tarif_fixed_cost
         val internetPrice = userData?.tarif_fixed_cost?.toDouble()?.toInt()
         binding.internetprice.text = "Абонплата: $internetPrice руб."
         binding.fee.text = "Дополнительно: " + intent.getStringExtra("SUBSCRIPTION")
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 "https://payframe.ckassa.ru/?service=17014-17197-1&Л_СЧЕТ=$personalAccount"
             val intent1 = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent1)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(basePayUrl))
+            val intent = Intent(Intent.ACTION_VIEW, basePayUrl.toUri())
             startActivity(intent)
         }
         binding.credit.setOnClickListener {

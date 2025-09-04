@@ -14,20 +14,22 @@
     <string name="BadData">Ошибка данных</string>
     <string name="SubscriptionDataError">Ошибка получения данных подписки</string>
     <string name="InternetConnectionFail">Отсутствует подключение к интернету, попробуйте включить «Режим полёта» в настройках,         а через некоторое время выключить его</string>
-    <string name="RetryButtonText">На страницу авторизации</string>
+    <string name="RetryButtonText">НА СТРАНИЦУ АВТОРИЗАЦИИ</string>
     <string name="LoginPromptText">Введите логин</string>
     <string name="PasswordPromptText">Введите пароль</string>
     <string name="AutorizationButtonText">ВОЙТИ</string>
     <string name="SaveCheckboxText">Сохранить логин и пароль</string>
     <string name="LoginBySMS">Авторизация по номеру телефона</string>
     <string name="AbonStatus">Статус:</string>
-    <string name="PayButtonText">Оплатить</string>
-    <string name="CreditButtonText">Обещанный платеж</string>
+    <string name="PayButtonText">ОПЛАТИТЬ</string>
+    <string name="CreditButtonText">ОБЕЩАННЫЙ ПЛАТЕЖ</string>
     <string name="LogoDescription">BS_Logo</string>
-    <string name="CreditPayButtonTexr">Активировать услугу</string>
-    <string name="ConfirmCreditCheckboxText">подтверждаю</string>
+    <string name="CreditPayButtonTexr">АКТИВИРОВАТЬ УСЛУГУ</string>
+    <string name="ConfirmCreditCheckboxText">ПОДТВЕРЖДАЮ</string>
     <string name="BackButtonText">ВЕРНУТЬСЯ НАЗАД</string>
     <string name="PhoneNumberPrompt">Введите номер телефона</string>
-    <string name="GetSmsCode">Получить код по смс</string>
+    <string name="GetSmsCode">ПОЛУЧИТЬ СМС</string>
     <string name="LognPasswordAutorization">Авторизация по логин и пароль</string>
+    <string name="PauseContractMessage">Действие договора на оказание услуг связи приостановлено, обратитесь в службу технической поддержки по телефону:</string>
+    <string name="SupportPhoneNumber" translatable="false">8 800 444-11-09</string>
 </resources>

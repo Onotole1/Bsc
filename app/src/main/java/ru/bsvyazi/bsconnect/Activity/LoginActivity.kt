@@ -2,8 +2,8 @@ package ru.bsvyazi.bsconnect.Activity
 
 import ApiClient
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
@@ -35,7 +35,8 @@ class LoginActivity : AppCompatActivity() {
         saveCheckBox.isChecked = true
 
         fun setMessage(status: Boolean, linkResMessage: Int) {
-            // установка цвета сообщения BLACK - normal, alert - error
+            // установка цвета сообщения text_color - normal, alert - error
+            messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
             if (status) messageTextView.setTextColor(getColor(R.color.text_color))
             else messageTextView.setTextColor(ContextCompat.getColor(this, R.color.alert))
             messageTextView.text = getString(linkResMessage)
@@ -58,6 +59,18 @@ class LoginActivity : AppCompatActivity() {
         binding.message.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW,
                 "https://www.bsvyazi.ru/bsconnect_policy".toUri())
+            startActivity(intent)
+        }
+
+        binding.vkImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW,
+                "https://vk.com/bsvyazi".toUri())
+            startActivity(intent)
+        }
+
+        // уходим на авторизацию по смс
+        binding.messageSmsLogin.setOnClickListener{
+            val intent = Intent(this@LoginActivity, LoginByPhoneActivity::class.java)
             startActivity(intent)
         }
 

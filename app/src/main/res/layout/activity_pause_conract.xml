@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".Activity.PauseConractActivity">
+
+    <ImageView
+        android:id="@+id/bs_image"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/LogoDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bs_logo" />
+
+
+
+    <TextView
+        android:id="@+id/alert_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:textColor="@color/alert"
+        android:text="@string/PauseContractMessage"
+        app:layout_constraintStart_toStartOf="@id/bs_image"
+        app:layout_constraintEnd_toEndOf="@id/bs_image"
+        app:layout_constraintTop_toBottomOf="@id/bs_image"
+        />
+
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="@string/SupportPhoneNumber"
+        android:textStyle="bold"
+        android:textColor="@color/button_color"
+        app:layout_constraintStart_toStartOf="@id/alert_message"
+        app:layout_constraintEnd_toEndOf="@id/alert_message"
+        app:layout_constraintTop_toBottomOf="@id/alert_message"
+        />
+
+    <ImageView
+        android:id="@+id/vk_image"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/LogoDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messageLogin"
+        app:srcCompat="@drawable/vk_icon" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="@color/Bs_color_2"
@@ -109,5 +109,18 @@
         app:layout_constraintEnd_toEndOf="@id/message"
         app:layout_constraintTop_toBottomOf="@id/message"
         />
+
+    <ImageView
+        android:id="@+id/vk_image"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/LogoDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messageSmsLogin"
+        app:srcCompat="@drawable/vk_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
