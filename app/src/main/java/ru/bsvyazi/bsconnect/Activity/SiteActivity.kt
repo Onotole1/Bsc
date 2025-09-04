@@ -1,10 +1,11 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
+import ru.bsvyazi.bsconnect.R
 import ru.bsvyazi.bsconnect.databinding.ActivitySiteBinding
 
 
@@ -19,8 +20,8 @@ class SiteActivity : AppCompatActivity() {
                 return@let
             }
 
-            val text = it.getStringExtra(Intent.EXTRA_TEXT)
-            if (text.isNullOrBlank()) {
+            val url = intent.getStringExtra("URL")
+            if (url.isNullOrBlank()) {
                 Snackbar.make(binding.root, R.string.error_empty_content, LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok) {
                         finish()

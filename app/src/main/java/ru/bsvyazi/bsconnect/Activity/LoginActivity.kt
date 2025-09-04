@@ -1,4 +1,4 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.Activity
 
 import ApiClient
 import android.content.Intent
@@ -10,13 +10,12 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import ru.bsvyazi.bsconnect.R
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
-import ru.bsvyazi.bsconnect.utils.isFileExists
 import ru.bsvyazi.bsconnect.utils.isInternetAvailable
-import ru.bsvyazi.bsconnect.utils.login
-import ru.bsvyazi.bsconnect.utils.password
 import ru.bsvyazi.bsconnect.utils.readFromFile
 import ru.bsvyazi.bsconnect.utils.writeToFile
 
@@ -28,18 +27,18 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         val messageTextView: TextView = findViewById(R.id.message)
-        messageTextView.text = ""
+        //messageTextView.text = ""
         val editedLogin: EditText = findViewById(R.id.login)
         val editedPassword: EditText = findViewById(R.id.password)
         val saveCheckBox: CheckBox = findViewById(R.id.saveCheckBox)
         // по умолчанию чекбокс в положение - "сохранять"
         saveCheckBox.isChecked = true
 
-        fun setMessage(status: Boolean, message: String) {
+        fun setMessage(status: Boolean, linkResMessage: Int) {
             // установка цвета сообщения BLACK - normal, alert - error
-            if (status) messageTextView.setTextColor(Color.BLACK)
+            if (status) messageTextView.setTextColor(getColor(R.color.text_color))
             else messageTextView.setTextColor(ContextCompat.getColor(this, R.color.alert))
-            messageTextView.text = message
+            messageTextView.text = getString(linkResMessage)
         }
 
         // проверяем статус интернет соеденения
@@ -49,15 +48,22 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // проверяем наличие файла с данными для входа
-        if (isFileExists(this)) {
-            readFromFile(this)
-            editedLogin.setText(login)
-            editedPassword.setText(password)
+        val dataForLogin = readFromFile(this)
+        if (dataForLogin !== null) {
+            editedLogin.setText(dataForLogin.login)
+            editedPassword.setText(dataForLogin.password)
+        }
+
+        // политика обработки данных
+        binding.message.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW,
+                "https://www.bsvyazi.ru/bsconnect_policy".toUri())
+            startActivity(intent)
         }
 
         binding.autorization.setOnClickListener {
             if (editedLogin.text.isNullOrBlank() || editedPassword.text.isNullOrBlank()) {
-                setMessage(false, R.string.emptyLoginOrPasswordMessage.toString())
+                setMessage(false, R.string.emptyLoginOrPasswordMessage)
             } else {
                 val apiClient = ApiClient()
                 var token: String?
@@ -65,21 +71,21 @@ class LoginActivity : AppCompatActivity() {
                     token = try {
                         apiClient.loginSuspend(editedLogin.text.toString(), editedPassword.text.toString())
                     } catch (e: Exception) {
-                        setMessage(false, R.string.ApiRequestFail.toString())
+                        setMessage(false, R.string.ApiRequestFail)
                         null
                     }
                     if (token == null) {
-                        setMessage(false, R.string.BadLoginOrPassword.toString())
+                        setMessage(false, R.string.BadLoginOrPassword)
                     }
-                    setMessage(true, R.string.LoadingData.toString())
+                    setMessage(true, R.string.LoadingData)
                     if (token != null) {
                         val userData = try {
                             apiClient.getUserSuspend(token!!)
                         } catch (e: Exception) {
-                            setMessage(false, R.string.DataTransferError.toString())
+                            setMessage(false, R.string.DataTransferError)
                             null
                         }
-                        if (userData == null) setMessage(false, R.string.BadData.toString())
+                        if (userData == null) setMessage(false, R.string.BadData)
                         else {
                             // проверка чекбокса сохранять/не сохранять
                             if (saveCheckBox.isChecked) {
@@ -92,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                             val service = try {
                                 apiClient.getSubscriptionsSuspend(token!!)
                             } catch (e: Exception) {
-                                setMessage(false, R.string.SubscriptionDataError.toString())
+                                setMessage(false, R.string.SubscriptionDataError)
                                 null
                             }
 

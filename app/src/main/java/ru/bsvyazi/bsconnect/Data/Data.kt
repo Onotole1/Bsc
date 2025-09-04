@@ -2,6 +2,11 @@
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+data class DataForLogin (
+    val login: String,
+    val password: String
+)
+
 // Data classes for login response
 data class LoginResponse(
     val success: Boolean,

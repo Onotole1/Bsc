@@ -5,6 +5,7 @@
     <string name="authorization_message">Autorization</string>
     <string name="authorization_error">Autorization fail</string>
     <string name="credit_info">By ordering a credit service, you confirm your agreement to pay the full subscription fee for the current month</string>
+    <string name="confidential_policy">By clicking \"Login\", you agree to the privacy policy</string>
     <string name="emptyLoginOrPasswordMessage">login or password is empty</string>
     <string name="credit_alert">The service is available for a maximum of 3 days and can be used once per calendar month.</string>
     <string name="ApiRequestFail">API request failed</string>
@@ -26,7 +27,8 @@
     <string name="LogoDescription">BS_Logo</string>
     <string name="CreditPayButtonTexr">Активировать услугу</string>
     <string name="ConfirmCreditCheckboxText">подтверждаю</string>
-    <string name="BackButtonText">На страницу авторизации</string>
+    <string name="BackButtonText">BACK TO LOGIN</string>
+    <string name="PhoneNumberPrompt">Enter phone number</string>
     <string name="GetSmsCode">Получить код по смс</string>
     <string name="LognPasswordAutorization">Авторизация по логин и пароль</string>
 </resources>

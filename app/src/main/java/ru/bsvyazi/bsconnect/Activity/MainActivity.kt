@@ -1,4 +1,4 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.Activity
 
 import ru.bsvyazi.bsconnect.utils.PaymentReminderWorker
 import UserData
@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import ru.bsvyazi.bsconnect.R
 import ru.bsvyazi.bsconnect.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar

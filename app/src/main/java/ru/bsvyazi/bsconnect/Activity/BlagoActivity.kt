@@ -1,4 +1,4 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.Activity
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import ru.bsvyazi.bsconnect.R
 import ru.bsvyazi.bsconnect.databinding.ActivityBlagoBinding
 
 class BlagoActivity : AppCompatActivity() {

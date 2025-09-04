@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">                  #000000</color>
-    <color name="white">                  #FFFFFF</color>
-    <color name="alert">                  #C14D43</color>
+    <color name="text_color">             #000000</color>
+    <color name="alert">                  #FF0000</color>
     <color name="ok">                     #58AC77</color>
-    <color name="Bs_color">               #3A8B7D</color>
+    <color name="Bs_color_1">             #3A8B7D</color>
+    <color name="Bs_color_2">             #f89e2e</color>
     <color name="button_color">           #016994</color>
+    <color name="button_text_color">      #FFFFFF</color>
     <color name="non_active_button_color">#808080</color>
     <color name="background_color">       #FFFFFF</color> <!-- светлая тема -->
 </resources>

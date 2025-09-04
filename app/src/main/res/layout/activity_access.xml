@@ -5,19 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccessActivity">
+    android:background="@color/background_color"
+    tools:context=".Activity.AccessActivity">
 
     <ImageView
         android:id="@+id/bs_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="45dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:contentDescription="@string/LogoDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bs_pic_background" />
+        app:srcCompat="@drawable/bs_logo" />
 
 
     <TextView
@@ -28,8 +30,8 @@
         android:text="@string/InternetConnectionFail"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="22dp"
+        android:layout_marginTop="40dp"
+        android:textSize="22sp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="@id/retry"
         app:layout_constraintEnd_toEndOf="@id/retry"
@@ -41,11 +43,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         app:layout_goneMarginTop="20dp"
-        android:text="@string/RetryButtonText"
+        android:textColor="@color/button_text_color"
+        android:text="@string/BackButtonText"
         android:backgroundTint="@color/button_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/message"

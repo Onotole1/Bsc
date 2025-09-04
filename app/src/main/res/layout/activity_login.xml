@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context="ru.bsvyazi.bsconnect.LoginActivity">
+    tools:context="ru.bsvyazi.bsconnect.Activity.LoginActivity">
 
     <ImageView
         android:id="@+id/bs_image"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bs_pic_background" />
+        app:srcCompat="@drawable/bs_logo" />
 
     <EditText
         android:id="@+id/login"
@@ -56,9 +56,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
+        android:textColor="@color/button_text_color"
         android:text="@string/AutorizationButtonText"
         android:backgroundTint="@color/button_color"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +74,9 @@
         android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textColor="@color/Bs_color_2"
         android:gravity="center"
-        android:text=""
+        android:text="@string/confidential_policy"
         app:layout_constraintStart_toStartOf="@id/saveCheckBox"
         app:layout_constraintEnd_toEndOf="@id/saveCheckBox"
         app:layout_constraintTop_toBottomOf="@id/saveCheckBox"

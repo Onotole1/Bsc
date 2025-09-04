@@ -20,22 +20,22 @@
         android:theme="@style/Theme.bsconnect"
         tools:targetApi="31">
         <activity
-            android:name=".PhoneLogin"
+            android:name=".Activity.PhoneLogin"
             android:exported="false" />
         <activity
-            android:name=".AccessActivity"
+            android:name=".Activity.AccessActivity"
             android:exported="false" />
         <activity
-            android:name=".BlagoActivity"
+            android:name=".Activity.BlagoActivity"
             android:exported="false" />
         <activity
-            android:name=".CreditActivity"
+            android:name=".Activity.CreditActivity"
             android:exported="false" />
         <activity
             android:name=".ConfidentialActivity"
             android:exported="false" />
         <activity
-            android:name=".SiteActivity"
+            android:name=".Activity.SiteActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true"
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
     </application>
 

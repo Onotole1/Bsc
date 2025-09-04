@@ -1,4 +1,4 @@
-package ru.bsvyazi.bsconnect
+package ru.bsvyazi.bsconnect.Activity
 
 import android.content.Intent
 import android.os.Bundle
