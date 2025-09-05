@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        //val intent = intent
         val userData : UserData? = intent.getParcelableExtra("USER_DATA")!!
 
         //поверяем доступность обещанного платежа если не доступен гасим кнопку

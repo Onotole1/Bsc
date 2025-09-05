@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".Activity.PauseConractActivity">
+    tools:context=".Activity.PauseContractActivity">
 
     <ImageView
         android:id="@+id/bs_image"
@@ -56,6 +56,22 @@
         app:layout_constraintTop_toBottomOf="@id/alert_message"
         />
 
+    <Button
+        android:id="@+id/retry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:layout_goneMarginTop="20dp"
+        android:textColor="@color/button_text_color"
+        android:text="@string/BackButtonText"
+        android:backgroundTint="@color/button_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phone_number"
+        />
+
     <ImageView
         android:id="@+id/vk_image"
         android:layout_width="match_parent"
@@ -66,7 +82,7 @@
         android:contentDescription="@string/LogoDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/messageLogin"
+        app:layout_constraintTop_toBottomOf="@id/retry"
         app:srcCompat="@drawable/vk_icon" />
 
 

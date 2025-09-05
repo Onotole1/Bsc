@@ -107,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
                                     editedPassword.text.toString()
                                 )
                             } else ru.bsvyazi.bsconnect.utils.deleteFile(this@LoginActivity)
+
                             // загружаем данные подписок
                             val service = try {
                                 apiClient.getSubscriptionsSuspend(token!!)
@@ -115,20 +116,27 @@ class LoginActivity : AppCompatActivity() {
                                 null
                             }
 
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            intent.putExtra("USER_DATA", userData)
-                            intent.putExtra("LOGIN", editedLogin.text)
-                            // проверяем подписки, если нет то передаем нулевые значения
-                            if (service != null) {
-                                val activeService = service.firstOrNull { it.active > 0 }
-                                intent.putExtra("SUBSCRIPTION", activeService?.name)
-                                intent.putExtra("SUBSCRIPTION_PRICE", activeService?.info?.service_price)
+                            // если договор приостановлен
+                            if (userData.blocked == "1") {
+                                val intent = Intent(this@LoginActivity, PauseContractActivity::class.java)
+                                startActivity(intent)
                             }
                             else {
-                                intent.putExtra("SUBSCRIPTION", "")
-                                intent.putExtra("SUBSCRIPTION_PRICE", "0")
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.putExtra("USER_DATA", userData)
+                                intent.putExtra("LOGIN", editedLogin.text)
+                                // проверяем подписки, если нет то передаем нулевые значения
+                                if (service != null) {
+                                    val activeService = service.firstOrNull { it.active > 0 }
+                                    intent.putExtra("SUBSCRIPTION", activeService?.name)
+                                    intent.putExtra("SUBSCRIPTION_PRICE", activeService?.info?.service_price)
+                                }
+                                else {
+                                    intent.putExtra("SUBSCRIPTION", "")
+                                    intent.putExtra("SUBSCRIPTION_PRICE", "0")
+                                }
+                                startActivity(intent)
                             }
-                            startActivity(intent)
                         }
                     }
                 }

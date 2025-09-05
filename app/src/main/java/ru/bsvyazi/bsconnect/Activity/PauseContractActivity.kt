@@ -5,14 +5,20 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import ru.bsvyazi.bsconnect.databinding.ActivityPauseConractBinding
+import ru.bsvyazi.bsconnect.databinding.ActivityPauseContractBinding
 
-class PauseConractActivity : AppCompatActivity() {
+class PauseContractActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityPauseConractBinding.inflate(layoutInflater)
+        val binding = ActivityPauseContractBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        binding.retry.setOnClickListener {
+            val intent = Intent(this@PauseContractActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.phoneNumber.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = "tel:+78004441109".toUri()
