@@ -8,5 +8,6 @@
     <color name="button_color">           #016994</color>
     <color name="non_active_button_color">#808080</color>
     <color name="button_text_color">      #f89e2e</color>
+    <color name="line_color">             #CCCCCC</color>
     <color name="background_color">       #000000</color> <!-- темная тема -->
 </resources>

@@ -124,7 +124,6 @@ class LoginActivity : AppCompatActivity() {
                             else {
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 intent.putExtra("USER_DATA", userData)
-                                intent.putExtra("LOGIN", editedLogin.text)
                                 // проверяем подписки, если нет то передаем нулевые значения
                                 if (service != null) {
                                     val activeService = service.firstOrNull { it.active > 0 }
