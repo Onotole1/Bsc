@@ -70,13 +70,13 @@ class MainActivity : AppCompatActivity() {
         val price = userData?.tarif_fixed_cost?.toDoubleOrNull()
         binding.abonplata.text = "Цена: " + String.format("%.2f", price) + " руб."
         var total : Double
-        val imageView: ImageView = findViewById(R.id.tv_logo)
+        val tvLogo: ImageView = findViewById(R.id.tv_logo)
         if (subscription != null) {
             // выводим логотип ТВ провайдера
-            if (subscription.contains("movi")) imageView.setImageResource(R.drawable.moovi_logo)
-            else imageView.setImageResource(R.drawable.smotreshka_logo)
+            if (subscription.contains("moovi")) tvLogo.setImageResource(R.drawable.moovi_logo)
+            else tvLogo.setImageResource(R.drawable.smotreshka_logo)
 
-            binding.fee.text = "Подписка: " + subscription.replace(Regex("\\[.*?\\]"), "")
+            binding.fee.text = "Доп.: " + subscription.replace(Regex("\\[.*?\\]"), "")
             val sub_price = subscription_price?.toDoubleOrNull()
             binding.feePrice.text = "Цена: " + String.format("%.2f", sub_price) + " руб."
             total = sub_price?.let { price?.plus(it) }!!
@@ -84,19 +84,21 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             // гасим лишние разделители
-            imageView.isVisible = false
+            tvLogo.isVisible = false
             total = price!!
             binding.line1.isVisible = false
             binding.line2.isVisible = false
             binding.line3.isVisible = false
         }
         var payDate = userData?.date_itog.toString()
-        if ((total/getCurrentMonthDays()) < currentBalance!!) binding.payDate.text = "Следующий платеж до $payDate"
+        val offPicture: ImageView = findViewById(R.id.off_picture)
+        if ((total/getCurrentMonthDays()) < currentBalance!!) {
+            offPicture.isVisible = false
+            binding.payDate.text = "Следующий платеж до $payDate"
+        }
         else {
-            val abonentIsOff : TextView = findViewById(R.id.pay_date)
-            abonentIsOff.setBackgroundColor(R.color.ok)
-            abonentIsOff.setTextColor(R.color.button_text_color)
-            binding.payDate.text = "Статус абонента: ОТКЛЮЧЕН"
+            offPicture.isVisible = true
+            //binding.payDate.text = "Статус:"
         }
 
         //поверяем доступность обещанного платежа если не доступен гасим кнопку
