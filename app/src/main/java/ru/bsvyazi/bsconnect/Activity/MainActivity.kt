@@ -1,6 +1,5 @@
 package ru.bsvyazi.bsconnect.Activity
 
-import ru.bsvyazi.bsconnect.utils.PaymentReminderWorker
 import UserData
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -24,8 +23,11 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import ru.bsvyazi.bsconnect.utils.scheduleAlarm
 import java.time.YearMonth
-
+import android.content.Context
+import ru.bsvyazi.bsconnect.utils.scheduleNotification
+import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n", "ResourceAsColor", "DefaultLocale")
@@ -65,10 +67,10 @@ class MainActivity : AppCompatActivity() {
         //заполняем экран информацией об абоненте
         binding.fio.text = userData?.fio
         val currentBalance = userData?.deposit?.toDouble()
-        binding.balance.text = "Текущий баланс: " + String.format("%.2f", currentBalance) + " руб."
-        binding.tariff.text ="Тарифный план: " + removeBracket(userData?.tarif)
+        binding.balance.text = getString(R.string.userBalanceMsg) + " " + String.format("%.2f", currentBalance) + " руб."
+        binding.tariff.text = getString(R.string.userServiceNameMsg) + " " + removeBracket(userData?.tarif)
         val price = userData?.tarif_fixed_cost?.toDoubleOrNull()
-        binding.abonplata.text = "Цена: " + String.format("%.2f", price) + " руб."
+        binding.abonplata.text = getString(R.string.userServiceCostMsg) + " " + String.format("%.2f", price) + " руб."
         var total : Double
         val tvLogo: ImageView = findViewById(R.id.tv_logo)
         if (subscription != null) {
@@ -76,11 +78,11 @@ class MainActivity : AppCompatActivity() {
             if (subscription.contains("moovi")) tvLogo.setImageResource(R.drawable.moovi_logo)
             else tvLogo.setImageResource(R.drawable.smotreshka_logo)
 
-            binding.fee.text = "Доп.: " + subscription.replace(Regex("\\[.*?\\]"), "")
+            binding.fee.text = getString(R.string.userSubscrNameMsg) + " " + subscription.replace(Regex("\\[.*?\\]"), "")
             val sub_price = subscription_price?.toDoubleOrNull()
-            binding.feePrice.text = "Цена: " + String.format("%.2f", sub_price) + " руб."
+            binding.feePrice.text = getString(R.string.userServiceCostMsg) + " " + String.format("%.2f", sub_price) + " руб."
             total = sub_price?.let { price?.plus(it) }!!
-            binding.total.text = "Итого: " + String.format("%.2f", total) + " руб."
+            binding.total.text = getString(R.string.userTotalCostMsg) + " " + String.format("%.2f", total) + " руб."
         }
         else {
             // гасим лишние разделители
@@ -92,54 +94,26 @@ class MainActivity : AppCompatActivity() {
         }
         var payDate = userData?.date_itog.toString()
         val offPicture: ImageView = findViewById(R.id.off_picture)
+
+        // проверяем, не отключен ли абонент
         if ((total/getCurrentMonthDays()) < currentBalance!!) {
             offPicture.isVisible = false
-            binding.payDate.text = "Следующий платеж до $payDate"
+            binding.payDate.text = getString(R.string.userNextPayDateMsg) + " $payDate"
+            //если не отключен планируем напоминание пушем
+            scheduleNotification(context, "24-09-2025")
         }
         else {
             offPicture.isVisible = true
-            //binding.payDate.text = "Статус:"
         }
 
         //поверяем доступность обещанного платежа если не доступен гасим кнопку
         val creditButton: Button = findViewById(R.id.credit)
-        if (userData.credit != "0") creditButton.isEnabled = false
-        else creditButton.isEnabled = true
-
-
-
-
-        //получаем инфу о дате оплаты
-
-        // если абонет отключен ставим дату платежа - текущую дату
-        if (payDate == "") {
-            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            payDate = dateFormat.format(Date()).toString()
-        } else {
-            // запускаем процесс который его оповестит потом
-            //schedulePaymentReminder(payDate)
+        if (userData.credit != "0") {
+            creditButton.isEnabled = false
+            offPicture.isVisible = false
+            binding.payDate.text = getString(R.string.userNextPayDateMsg) + " $payDate"
         }
-
-//        val statusTextView: TextView = findViewById(R.id.curstatus)
-//        if (userData?.state == "1") {
-//            statusTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.ok))
-//            statusTextView.setTextColor(Color.WHITE)
-//            binding.curstatus.text = "Активен"
-//        } else {
-//            statusTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.alert))
-//            statusTextView.setTextColor(Color.WHITE)
-//            binding.curstatus.text = "Отключен"
-//        }
-//
-//
-//        val internetPrice = userData?.tarif_fixed_cost?.toDouble()?.toInt()
-//        binding.internetprice.text = "Абонплата: $internetPrice руб."
-//        binding.fee.text = "Дополнительно: " + intent.getStringExtra("SUBSCRIPTION")
-//        val feePrice = intent.getStringExtra("SUBSCRIPTION_PRICE")?.toDouble()?.toUInt().toString()
-//        binding.feeprice.text = "Абонплата: $feePrice руб."
-//        val totalPrice = feePrice?.plus(internetPrice!!)
-//        binding.totalprice.text = "Итого:     $totalPrice руб."
-
+        else creditButton.isEnabled = true
 
         binding.pay.setOnClickListener {
             //login абонента
@@ -155,31 +129,5 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("TOTALPRICE", 100.toString())
             startActivity(intent)
         }
-    }
-
-    fun schedulePaymentReminder(paymentDate: String) {
-        // Обработка даты
-        val paymentDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val paymentDateObj = paymentDateFormat.parse(paymentDate) ?: return
-
-        // Получаем текущее время и добавляем 3 дня
-        val currentTime = Calendar.getInstance()
-        currentTime.time = paymentDateObj
-        currentTime.add(Calendar.DAY_OF_YEAR, -1) // Устанавливаем на 3 дня раньше
-
-        // Запланируем уведомление
-        val inputData = Data.Builder()
-            .putString("payment_date", paymentDate)
-            .build()
-
-        val reminderRequest = OneTimeWorkRequest.Builder(PaymentReminderWorker::class.java)
-            .setInputData(inputData)
-            .setInitialDelay(
-                currentTime.timeInMillis - System.currentTimeMillis(),
-                TimeUnit.MILLISECONDS
-            ) // Задержка до времени уведомления
-            .build()
-
-        WorkManager.getInstance(this).enqueue(reminderRequest)
     }
 }

@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
         android:allowBackup="true"
@@ -35,9 +37,6 @@
             android:name=".Activity.CreditActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfidentialActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.SiteActivity"
             android:exported="false">
             <intent-filter>
@@ -61,6 +60,8 @@
         <activity
             android:name=".Activity.MainActivity"
             android:exported="false" />
+        <receiver android:name="ru.bsvyazi.bsconnect.utils.AlarmReceiver" android:exported="true"
+             />
     </application>
 
 </manifest>

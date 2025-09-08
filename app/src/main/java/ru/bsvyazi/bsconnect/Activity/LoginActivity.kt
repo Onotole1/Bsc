@@ -90,8 +90,8 @@ class LoginActivity : AppCompatActivity() {
                     if (token == null) {
                         setMessage(false, R.string.BadLoginOrPassword)
                     }
-                    setMessage(true, R.string.LoadingData)
                     if (token != null) {
+                        setMessage(true, R.string.LoadingData)
                         val userData = try {
                             apiClient.getUserSuspend(token!!)
                         } catch (e: Exception) {

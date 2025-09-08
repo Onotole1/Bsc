@@ -32,4 +32,11 @@
     <string name="LognPasswordAutorization">Авторизация по логин и пароль</string>
     <string name="PauseContractMessage">Действие договора на оказание услуг связи приостановлено, обратитесь в службу технической поддержки по телефону:</string>
     <string name="SupportPhoneNumber" translatable="false">8 800 444-11-09</string>
+    <string name="userBalanceMsg">Текущий баланс:</string>
+    <string name="userServiceNameMsg">Тарифный план:</string>
+    <string name="userServiceCostMsg">Цена:</string>
+    <string name="userSubscrNameMsg">Доп.:</string>
+    <string name="userTotalCostMsg">Итого:</string>
+    <string name="userNextPayDateMsg">Следующий платеж до</string>
+    <string name="userCreditMsg">Использован обещанный платеж</string>
 </resources>

@@ -11,15 +11,15 @@
     <ImageView
         android:id="@+id/bs_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="45dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/LogoDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bs_pic_background" />
+        app:srcCompat="@drawable/bs_logo" />
 
     <Button
         android:id="@+id/pay"

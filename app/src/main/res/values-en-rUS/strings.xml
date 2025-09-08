@@ -32,4 +32,11 @@
     <string name="GetSmsCode">GET SMS CODE</string>
     <string name="LognPasswordAutorization">Autorization by login and password</string>
     <string name="PauseContractMessage">The communication services agreement has been suspended. Please contact the technical support service by phone:</string>
+    <string name="userBalanceMsg">"Balance: "</string>
+    <string name="userServiceNameMsg">Service name:</string>
+    <string name="userServiceCostMsg">Service cost:</string>
+    <string name="userSubscrNameMsg">Subsc.:</string>
+    <string name="userTotalCostMsg">Total:</string>
+    <string name="userNextPayDateMsg">Next pay to</string>
+    <string name="userCreditMsg">The promised payment has been used</string>
 </resources>
