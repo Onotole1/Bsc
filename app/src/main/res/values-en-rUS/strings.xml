@@ -43,4 +43,6 @@
     <string name="notificationText">The service will be suspended soon.</string>
     <string name="valute">RUR</string>
     <string name="userAddressMsg">"Your address: "</string>
+    <string name="CreditIsOnMsg">credit is active</string>
+    <string name="CreditFailMsg">credit service is fail</string>
 </resources>

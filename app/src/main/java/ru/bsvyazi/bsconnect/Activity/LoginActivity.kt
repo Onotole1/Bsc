@@ -1,6 +1,7 @@
 package ru.bsvyazi.bsconnect.Activity
 
 import ApiClient
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
@@ -60,6 +61,11 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW,
                 "https://www.bsvyazi.ru/bsconnect_policy".toUri())
             startActivity(intent)
+        }
+
+        binding.exit.setOnClickListener {
+            finishAffinity();
+            System.exit(0);
         }
 
         binding.vkImage.setOnClickListener {
@@ -124,6 +130,7 @@ class LoginActivity : AppCompatActivity() {
                             else {
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 intent.putExtra("USER_DATA", userData)
+                                //intent.putExtra("APISERVICE", apiClient)
                                 // проверяем подписки, если нет то передаем нулевые значения
                                 if (service != null) {
                                     val activeService = service.firstOrNull { it.active > 0 }

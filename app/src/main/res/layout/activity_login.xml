@@ -21,6 +21,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bs_logo" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/button_color"
+        android:contentDescription="@string/backFab"
+        app:borderWidth="1dp"
+        app:tint="@color/button_text_color"
+        app:fabCustomSize="40dp"
+        android:src="@drawable/exit_icon_216214"
+        app:layout_constraintTop_toTopOf="@id/bs_image"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <EditText
         android:id="@+id/login"
         android:layout_width="match_parent"

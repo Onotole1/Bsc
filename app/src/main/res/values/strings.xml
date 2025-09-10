@@ -44,5 +44,7 @@
     <string name="notificationText">скоро услуга будет приостановлена</string>
     <string name="valute">руб.</string>
     <string name="userAddressMsg">"Ваш адрес: "</string>
-    <string name="backFab">FAB for back to prev activity</string>
+    <string name="backFab" translatable="false">FAB for back to prev activity</string>
+    <string name="CreditIsOnMsg">ОБЕЩАННЫЙ ПЛАТЕЖ подключен !</string>
+    <string name="CreditFailMsg">Ошибка подключения ОБЕЩАННЫЙ ПЛАТЕЖ не подключен...</string>
 </resources>
