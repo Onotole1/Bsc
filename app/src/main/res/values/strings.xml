@@ -3,7 +3,7 @@
     <string name="error_empty_content">ошибка ссылки на сайт</string>
     <string name="authorization_message">Авторизация</string>
     <string name="authorization_error">Ошибка авторизации</string>
-    <string name="credit_info">Заказом услуги ОБЕЩАННЫЙ ПЛАТЕЖ вы подтверждаете ваше согласие оплатить в полном объеме абонплату за текущий месяц</string>
+    <string name="credit_info">Заказом услуги ОБЕЩАННЫЙ ПЛАТЕЖ вы подтверждаете ваше согласие оплатить в полном объеме абонплату за текущий месяц в размере</string>
     <string name="confidential_policy">Нажимая \"Войти\" вы соглашаетесь с политикой обработки данных</string>
     <string name="emptyLoginOrPasswordMessage">пароль или логин не могут быть пустыми</string>
     <string name="credit_alert">Услуга предоставляется на срок не более 3х дней и доступна 1 раз в течении 1 календарного месяц</string>
@@ -39,4 +39,10 @@
     <string name="userTotalCostMsg">Итого:</string>
     <string name="userNextPayDateMsg">Следующий платеж до</string>
     <string name="userCreditMsg">Использован обещанный платеж</string>
+    <string name="notificationTag" translatable="false">bsconnect payment reminder</string>
+    <string name="notificationTitle">Оплатите за интернет</string>
+    <string name="notificationText">скоро услуга будет приостановлена</string>
+    <string name="valute">руб.</string>
+    <string name="userAddressMsg">"Ваш адрес: "</string>
+    <string name="backFab">FAB for back to prev activity</string>
 </resources>

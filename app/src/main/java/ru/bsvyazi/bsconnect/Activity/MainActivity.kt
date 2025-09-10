@@ -7,27 +7,17 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import ru.bsvyazi.bsconnect.R
-import ru.bsvyazi.bsconnect.databinding.ActivityMainBinding
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
-import ru.bsvyazi.bsconnect.utils.scheduleAlarm
-import java.time.YearMonth
-import android.content.Context
+import ru.bsvyazi.bsconnect.R
+import ru.bsvyazi.bsconnect.databinding.ActivityMainBinding
+import ru.bsvyazi.bsconnect.utils.changeDayInDate
+import ru.bsvyazi.bsconnect.utils.checkScheduledNotification
 import ru.bsvyazi.bsconnect.utils.scheduleNotification
-import kotlin.coroutines.jvm.internal.CompletedContinuation.context
+import java.time.YearMonth
+
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n", "ResourceAsColor", "DefaultLocale")
@@ -85,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             binding.total.text = getString(R.string.userTotalCostMsg) + " " + String.format("%.2f", total) + " руб."
         }
         else {
-            // гасим лишние разделители
+            // гасим лишние разделители и изображения
             tvLogo.isVisible = false
             total = price!!
             binding.line1.isVisible = false
@@ -99,8 +89,14 @@ class MainActivity : AppCompatActivity() {
         if ((total/getCurrentMonthDays()) < currentBalance!!) {
             offPicture.isVisible = false
             binding.payDate.text = getString(R.string.userNextPayDateMsg) + " $payDate"
-            //если не отключен планируем напоминание пушем
-            scheduleNotification(context, "24-09-2025")
+            //если не отключен планируем напоминание пушем если пуш не запланирован
+            if (checkScheduledNotification(this) ) {
+                println("пуш запланирован")
+            }
+            else {
+                val notificationDate = changeDayInDate(payDate, -1)
+                if (notificationDate != null) scheduleNotification(this, notificationDate)
+            }
         }
         else {
             offPicture.isVisible = true
@@ -115,6 +111,11 @@ class MainActivity : AppCompatActivity() {
         }
         else creditButton.isEnabled = true
 
+        binding.back.setOnClickListener {
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.pay.setOnClickListener {
             //login абонента
             val personalAccount = userData.user
@@ -123,10 +124,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, basePayUrl.toUri())
             startActivity(intent)
         }
+
         binding.credit.setOnClickListener {
             val intent = Intent(this@MainActivity, CreditActivity::class.java)
-            intent.putExtra("ADDRESS", "_userData.address")
-            intent.putExtra("TOTALPRICE", 100.toString())
+            intent.putExtra("TOTALPRICE", total.toString())
+            intent.putExtra("ADDRESS", userData.address)
             startActivity(intent)
         }
     }

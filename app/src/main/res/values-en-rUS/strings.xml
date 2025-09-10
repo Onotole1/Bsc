@@ -4,7 +4,7 @@
     <string name="error_empty_content">bad link</string>
     <string name="authorization_message">Autorization</string>
     <string name="authorization_error">Autorization fail</string>
-    <string name="credit_info">By ordering a credit service, you confirm your agreement to pay the full subscription fee for the current month</string>
+    <string name="credit_info">By ordering a credit service, you confirm your agreement to pay the full subscription fee for the current month in</string>
     <string name="confidential_policy">By clicking \"Login\", you agree to the privacy policy</string>
     <string name="emptyLoginOrPasswordMessage">login or password is empty</string>
     <string name="credit_alert">The service is available for a maximum of 3 days and can be used once per calendar month.</string>
@@ -39,4 +39,8 @@
     <string name="userTotalCostMsg">Total:</string>
     <string name="userNextPayDateMsg">Next pay to</string>
     <string name="userCreditMsg">The promised payment has been used</string>
+    <string name="notificationTitle">pay for the Internet</string>
+    <string name="notificationText">The service will be suspended soon.</string>
+    <string name="valute">RUR</string>
+    <string name="userAddressMsg">"Your address: "</string>
 </resources>
