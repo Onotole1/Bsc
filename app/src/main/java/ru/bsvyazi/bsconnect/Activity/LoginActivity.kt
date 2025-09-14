@@ -1,7 +1,5 @@
 package ru.bsvyazi.bsconnect.Activity
 
-import ApiClient
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
@@ -16,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.bsvyazi.bsconnect.R
+import ru.bsvyazi.bsconnect.api.ApiClient
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
 import ru.bsvyazi.bsconnect.utils.isInternetAvailable
 import ru.bsvyazi.bsconnect.utils.readFromFile
