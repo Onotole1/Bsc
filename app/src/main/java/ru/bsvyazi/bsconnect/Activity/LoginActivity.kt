@@ -13,15 +13,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.bsvyazi.bsconnect.R
 import ru.bsvyazi.bsconnect.databinding.ActivityLoginBinding
 import ru.bsvyazi.bsconnect.utils.isInternetAvailable
 import ru.bsvyazi.bsconnect.utils.readFromFile
 import ru.bsvyazi.bsconnect.utils.writeToFile
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+    @Inject
+    lateinit var apiClient: ApiClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -84,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
             if (editedLogin.text.isNullOrBlank() || editedPassword.text.isNullOrBlank()) {
                 setMessage(false, R.string.emptyLoginOrPasswordMessage)
             } else {
-                val apiClient = ApiClient()
+                //val apiClient = ApiClient()
                 var token: String?
                 lifecycleScope.launch {
                     token = try {

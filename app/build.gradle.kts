@@ -2,16 +2,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "ru.bsvyazi.bsconnect"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "ru.bsvyazi.bsconnect"
-        minSdk = 23
-        targetSdk = 35
+        minSdk = 22
+        //noinspection EditedTargetSdkVersion
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -31,13 +34,15 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
+
     sourceSets {
         getByName("main") {
             java {
@@ -52,28 +57,37 @@ android {
     }
 }
 
-dependencies {
+buildscript {
+    dependencies {
+        // Consider updating this if you use a newer Hilt version in your app module
+        classpath(libs.hilt.android.gradle.plugin) // This uses 2.44
+    }
+}
 
+dependencies {
     implementation(libs.androidx.activity)
-    //implementation(libs.androidx.annotation)
-    val coreVersion = "1.16.0"
-    val appcompatVersion = "1.7.0"
-    val mdcVersion = "1.12.0"
-    val constraintlayoutVersion = "2.2.0"
-    val recyclerviewVersion = "1.3.2"
+
+    val appcompatVersion = "1.7.1"
+    val mdcVersion = "1.13.0"
+    val constraintlayoutVersion = "2.2.1"
+    val recyclerviewVersion = "1.4.0"
     val junitVersion = "4.13.2"
     val extJunitVersion = "1.2.1"
     val espressoCoreVersion = "3.6.1"
-    val activityVersion = "1.9.3"
-    val lifecycleVersion = "2.8.7"
-    val gson_version = "2.11.0"
-    val retrofit_version = "2.11.0"
+    val activityVersion = "1.11.0"
+    val lifecycleVersion = "2.9.3"
+    val gson_version = "2.13.2"
+    val retrofit_version = "3.0.0"
+    val okhttp_version = "5.1.0"
+    val core_version = "1.16.0"
+    val work_runtime_version = "2.10.4"
+    val hilt_version = "2.56.2"
 
-    implementation("com.google.code.gson:gson:2.11.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.code.gson:gson:$gson_version")
+    implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
-    implementation("androidx.core:core-ktx:$coreVersion")
+    implementation(libs.androidx.core.ktx)
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
     implementation("com.google.android.material:material:$mdcVersion")
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayoutVersion")
@@ -82,9 +96,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("com.google.code.gson:gson:$gson_version")
-    implementation("androidx.work:work-runtime-ktx:2.10.3")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
+    implementation("androidx.work:work-runtime-ktx:$work_runtime_version")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
+    implementation(libs.hilt.android)
+    kapt (libs.hilt.android.compiler)
     testImplementation("junit:junit:$junitVersion")
     androidTestImplementation("androidx.test.ext:junit:$extJunitVersion")
     androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")

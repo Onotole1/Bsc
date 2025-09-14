@@ -1,10 +1,12 @@
 package ru.bsvyazi.bsconnect.Activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import ru.bsvyazi.bsconnect.R
@@ -18,6 +20,7 @@ class BlagoActivity : AppCompatActivity() {
         setContentView(binding.root)
         val messageTextView: TextView = findViewById(R.id.message)
 
+        @RequiresApi(Build.VERSION_CODES.M)
         fun setMessage(status: Boolean, linkResMessage: Int) {
             // установка цвета сообщения text_color - normal, alert - error
             messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)

@@ -10,6 +10,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import android.util.Log
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 // Retrofit API interface
@@ -60,7 +62,10 @@ class UserAgentInterceptor(private val userAgent: String) : Interceptor {
     }
 }
 
-class ApiClient(userAgent: String = "MikbillApiAgent/1.0") {
+@Singleton
+class ApiClient @Inject constructor()
+{
+    private val userAgent: String = "MikbillApiAgent/1.0"
     private val apiService: ApiService
 
     init {
